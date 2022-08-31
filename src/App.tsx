@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import * as Icons from '@heroicons/react/24/outline';
-import Answer, { AnswerPropsType } from './components/Answer';
+import MultipleAnswer, {
+  MultipleAnswerType,
+} from './components/MultipleAnswer';
 
-const sampleAnswer: AnswerPropsType = {
+const sampleAnswer: MultipleAnswerType = {
   answers: [
     { letter: 'a', content: 'Change leading slash to trailing.' },
     { letter: 'b', content: 'Define absolute path' },
@@ -50,11 +52,16 @@ function App() {
 
         <div className="">
           {/* Answers */}
-          <Answer
-            answers={sampleAnswer.answers}
-            correctAnswer={sampleAnswer.correctAnswer}
-          />
+          <MultipleAnswer answerOptions={sampleAnswer} />
         </div>
+
+        {true && (
+          <div className="ml-auto w-full">
+            <button className="py-4 px-2 w-full text-white bg-indigo-700 hover:bg-indigo-600">
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
