@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { XCircleIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 
 type AnswerType = {
   letter: string;
@@ -28,6 +29,7 @@ function clickedReducer(state: StatePropsType, action: ActionPropsType) {
 
 function RadioAnswerItem({
   item,
+  correctAnswer,
 }: {
   item: AnswerType;
   correctAnswer: string;
@@ -38,11 +40,16 @@ function RadioAnswerItem({
   });
 
   return (
-    <div className="flex px-10 py-2 hover:bg-indigo-500 cursor-pointer items-center">
+    <div
+      className="flex px-10 py-2 hover:bg-indigo-500 cursor-pointer items-center"
+      onClick={() => dispatch({ type: ACTION.CLICKED, payload: item.letter })}
+    >
       <div className="relative flex border border-indigo-200 rounded-full w-4 h-4">
-        <span className="absolute top-1/2 -translate-y-[50%] bg-indigo-300 left-0 -translate-x-[100%] px-2 rounded">
-          {item.letter}
-        </span>
+        {state.selected === correctAnswer ? (
+          <CheckCircleIcon className="w-4 h-4" />
+        ) : (
+          <XCircleIcon className="w-4 h-4" />
+        )}
       </div>
       <span className="px-2">{item.content}</span>
     </div>
